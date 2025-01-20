@@ -9,6 +9,11 @@ News
 {% block content %}
     <h1>Cписок всех постов</h1>
     <a>Домой</a>
+<form action="" method="get">
+    {{ filterset.form.as_p }}
+    <input type="submit" value="Найти">
+
+</form>
     <br>
     {% if news %}
         <style>
