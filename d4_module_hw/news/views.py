@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from .models import Post
 from django.core.paginator import Paginator
 from .filters import PostFilter
-
+from django.shortcuts import render
 
 class PostList(ListView):
     model = Post
@@ -22,6 +22,7 @@ class PostList(ListView):
         queryset = super().get_queryset()
         self.filterset = PostFilter(self.request.GET, queryset)
         return self.filterset.qs.order_by('id')
+
 
 class PostDetail(DetailView):
     model = Post
