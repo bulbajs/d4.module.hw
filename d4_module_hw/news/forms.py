@@ -2,16 +2,11 @@ from django import forms
 from .models import Post
 
 
-class ArticleForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'time_in_Post', 'authorUser']
+        fields = ['title', 'postCategory', 'text', 'postAuthor']
 
-
-class NewsForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['title', 'time_in_Post', 'authorUser']
 
 
 

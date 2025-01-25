@@ -1,8 +1,10 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Post
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from django.shortcuts import render
+from .forms import PostForm
+from django.urls import reverse_lazy
 
 class PostList(ListView):
     model = Post
@@ -28,3 +30,32 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'flatpages/post.html'
     context_object_name = 'post'
+
+
+class NewsCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'flatpages/news_form.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.categoryType = 'news'
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('news_list')
+
+
+class ArticleCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'flatpages/articles_list.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.categoryType = 'art'
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('news_list')
+
