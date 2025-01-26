@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Post
 from django.core.paginator import Paginator
 from .filters import PostFilter
@@ -36,26 +36,47 @@ class NewsCreateView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'flatpages/news_form.html'
+    success_url = reverse_lazy('news_list')
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.categoryType = 'news'
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy('news_list')
+    # def get_success_url(self):
+    #     return reverse_lazy('news_list')
 
 
 class ArticleCreateView(CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'flatpages/articles_list.html'
+    template_name = 'flatpages/articles_form.html'
+    success_url = reverse_lazy('news_list')
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.categoryType = 'art'
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy('news_list')
+    # def get_success_url(self):
+    #     return reverse_lazy('news_list')
+
+
+class UpdateNews(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'flatpages/news_form.html'
+    success_url = reverse_lazy('news_list')
+
+    # def get_success_url(self):
+    #     return reverse_lazy('news_list')
+
+class UpdateArticle(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'flatpages/articles_form.html'
+    success_url = reverse_lazy('news_list')
+
+    # def get_success_url(self):
+    #     return reverse_lazy('news_list')
 
