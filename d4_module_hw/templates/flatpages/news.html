@@ -22,14 +22,16 @@ News
         </style>
         <table>
             <tr>
+                <td>ID</td>
                 <td>Название</td>
                 <td>Описании статьи</td>
                 <td>Дата публикации</td>
             </tr>
             {% for post in news %}
             <tr>
-                <td>{{ post.title| censor}}</td>
-                <td> {{ post.text|truncatechars:20| censor }} </td>
+                <td>{{ post.id}}</td>
+                <td>{{ post.title| truncatewords:3 | censor}}</td>
+                <td> {{ post.text| truncatechars:50| censor }} </td>
                 <td>{{ post.time_in_Post}}</td>
             </tr>
             {% endfor %}

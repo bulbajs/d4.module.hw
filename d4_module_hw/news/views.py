@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from django.core.paginator import Paginator
 from .filters import PostFilter
@@ -71,6 +71,7 @@ class UpdateNews(UpdateView):
     # def get_success_url(self):
     #     return reverse_lazy('news_list')
 
+
 class UpdateArticle(UpdateView):
     model = Post
     form_class = PostForm
@@ -80,3 +81,14 @@ class UpdateArticle(UpdateView):
     # def get_success_url(self):
     #     return reverse_lazy('news_list')
 
+
+class DeleteNews(DeleteView):
+    model = Post
+    template_name = 'flatpages/delete_news.html'
+    success_url = reverse_lazy('news_list')
+
+
+class DeleteArticle(DeleteView):
+    model = Post
+    template_name = 'flatpages/delete_article.html'
+    success_url = reverse_lazy('news_list')
