@@ -29,7 +29,7 @@ News
             </tr>
             {% for post in news %}
             <tr>
-                <td>{{ post.id}}</td>
+                <td>{{ post.id }}</td>
                 <td>{{ post.title| truncatewords:3 | censor}}</td>
                 <td> {{ post.text| truncatechars:50| censor }} </td>
                 <td>{{ post.time_in_Post}}</td>
