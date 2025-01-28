@@ -6,6 +6,7 @@ from django.shortcuts import render
 from .forms import PostForm
 from django.urls import reverse_lazy
 
+
 class PostList(ListView):
     model = Post
     ordering = 'time_in_Post'
@@ -43,11 +44,8 @@ class NewsCreateView(CreateView):
         post.categoryType = 'news'
         return super().form_valid(form)
 
-    # def get_success_url(self):
-    #     return reverse_lazy('news_list')
 
-
-class ArticleCreateView(CreateView):
+class ArticlesCreateView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'flatpages/articles_form.html'
@@ -68,18 +66,12 @@ class UpdateNews(UpdateView):
     template_name = 'flatpages/news_form.html'
     success_url = reverse_lazy('news_list')
 
-    # def get_success_url(self):
-    #     return reverse_lazy('news_list')
 
-
-class UpdateArticle(UpdateView):
+class UpdateArticles(UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'flatpages/articles_form.html'
     success_url = reverse_lazy('news_list')
-
-    # def get_success_url(self):
-    #     return reverse_lazy('news_list')
 
 
 class DeleteNews(DeleteView):
@@ -88,7 +80,7 @@ class DeleteNews(DeleteView):
     success_url = reverse_lazy('news_list')
 
 
-class DeleteArticle(DeleteView):
+class DeleteArticles(DeleteView):
     model = Post
-    template_name = 'flatpages/delete_article.html'
+    template_name = 'flatpages/delete_articles.html'
     success_url = reverse_lazy('news_list')
